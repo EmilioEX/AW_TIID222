@@ -14,7 +14,19 @@
         div{
             background: #970fcc;
         }
-
+        .seccion1{
+            background-color: #b8ac67;
+            padding: 20px;
+            margin: 20px;
+            border: 15px hidden;
+        }
+        .seccion2{
+            background-color: #fcbd00;
+            padding-top: 20px;
+            padding-right: 30px;
+            padding-bottom: 40px;
+            padding-left: 50px;
+        }
 
     </style>
 </head>
@@ -29,6 +41,23 @@
     <div>
         <h2>Título del párrafo</h2>
         <p>Este es un párrafo</p>
+    </div>
+    <!--Nuevos ejercicios-->
+    <div class="seccion1">
+        <h2>Título del párrafo</h2>
+        <p>
+        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Impedit, cumque voluptatibus voluptates, sequi ipsum et ullam aperiam sint ut iusto facilis reprehenderit soluta corporis mollitia assumenda aut eius inventore quia.
+        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Impedit, cumque voluptatibus voluptates, sequi ipsum et ullam aperiam sint ut iusto facilis reprehenderit soluta corporis mollitia assumenda aut eius inventore quia.
+        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Impedit, cumque voluptatibus voluptates, sequi ipsum et ullam aperiam sint ut iusto facilis reprehenderit soluta corporis mollitia assumenda aut eius inventore quia.
+        </p>
+    </div>
+    <div class="seccion2">
+        <h2>Título del párrafo</h2>
+        <p>
+        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Impedit, cumque voluptatibus voluptates, sequi ipsum et ullam aperiam sint ut iusto facilis reprehenderit soluta corporis mollitia assumenda aut eius inventore quia.
+        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Impedit, cumque voluptatibus voluptates, sequi ipsum et ullam aperiam sint ut iusto facilis reprehenderit soluta corporis mollitia assumenda aut eius inventore quia.
+        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Impedit, cumque voluptatibus voluptates, sequi ipsum et ullam aperiam sint ut iusto facilis reprehenderit soluta corporis mollitia assumenda aut eius inventore quia.
+        </p>
     </div>
 </body>
 </html>
