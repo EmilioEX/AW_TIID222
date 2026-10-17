@@ -10,8 +10,7 @@
     $edad=$_POST['edad'];
     /*Construimos la consulta para insertar info en la bd*/
     $sql="insert into alumnos (matricula, nombre, apellidoP, apellidoM , edad)
-        values ('$matricula','$nombre','$apellidoP','$apellidoM','$edad')
-        ";
+        values ('$matricula','$nombre','$apellidoP','$apellidoM','$edad')";
     /*Ejecutamos la consulta*/
     $query = mysqli_query($con,$sql);
 
