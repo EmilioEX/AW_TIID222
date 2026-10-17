@@ -5,6 +5,8 @@
 
     $matricula = $_GET['matricula'];
 
+    $nombre=$_GET['nombre'];
+
     $sql="delete from alumnos where matricula='$matricula'";
 
     $query=mysqli_query($con,$sql);

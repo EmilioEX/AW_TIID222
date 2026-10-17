@@ -17,19 +17,44 @@
     <title>TIID-222 CRUD Alumnos</title>
 </head>
 <style>
-    th{
-        border: 2px solid black;
+    html, body{
+        margin: 0px;
     }
-    td{
-        border: 2px solid black;
+    h1{
+        text-align: center;
+    }
+    table{
+        border: 4px solid yellow;
+    }
+    td, th{
+        border: 4px solid #eccf2b;
+        padding: 10px;
+    }
+
+    table td{
+        text-align: center;
+    }
+    .div1{
+        background-color: #ec9f2b;
+        display:flex;
+        flex-direction: column;
+        /*flex:1;*/
+        padding: 20px;
+    }
+    .div2{
+        background-color: #ec782b;
+        display:flex;
+        flex-direction: column;
+        align-items:center;
+        flex:1;
     }
 </style>
 <body style="font-family: Arial">
 
-    <div style= "display:grid; grid-template-columns: 2fr 1fr; gap:20px">
-        <div>
+    <div style= "display:grid; grid-template-columns: 1fr 1fr; gap:20px; margin: 20px;">
+        <div class="div1">
             <h1>Tabla de Alumnos</h1>
-            <table style="border: 2px solid black">
+            <table>
                 <thead>
                     <tr>
                         <th >Matrícula</th>
@@ -37,8 +62,7 @@
                         <th >Apellido Paterno</th>
                         <th >Apellido Materno</th>
                         <th >Edad</th>
-                        <th >Acciones</th>
-                        <th >    </th>
+                        <th colspan="2">Acciones</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -51,30 +75,19 @@
                         <td><?php echo $row['apellidoP']?></td>
                         <td><?php echo $row['apellidoM']?></td>
                         <td><?php echo $row['edad']?></td>
+                        <td> <a href="eliminar.php?matricula=<?php echo $row['matricula']; ?>">Eliminar</a></td>
+                        <td> <a href="editar.php?matricula=<?php echo $row['matricula']; ?>">Editar</a></td>
                     </tr>
                     <?php
                         }
                     ?>
-                    <tr>            
-                        <td>123</td>
-                        <td>123</td>
-                        <td>123</td>
-                        <td>123</td>
-                    </tr>
-                    <tr>
-                        <td>1234</td>
-                    </tr>
-                        <td>12345</td>
-                    <tr>
-                        <td></td>
-                    </tr>
                     <tr>
                         <td></td>
                     </tr>
                 </tbody>
             </table>
         </div>
-        <div>
+        <div class="div2">
             <h1>Formulario</h1>
             <form action="insertar.php" method="POST">
                 <div>
@@ -88,6 +101,5 @@
             </form>
         </div>
     </div>
-    
 </body>
 </html>
