@@ -8,7 +8,7 @@
 <body>
     <div>
         <h1></h1>
-        <form action="">
+        <form action="/register" method="POST">
             <label>Nombre: </label>
             <input type="text" name="nombre" required >
             <br>
@@ -22,7 +22,7 @@
             <input type="text" name="correo" required >
             <br>
             <label>Contraseña: </label>
-            <input type="text" name="password_hash" required >
+            <input type="text" name="password" required >
             <br>
             <label for="id_rol">Rol: </label>
             <select name="id_rol" id="id_rol">
@@ -32,7 +32,7 @@
             <br>
             <button type="submit">Registrarse</button>
         </form>
-        <p><a href="{{url_for('login') }}">Regresar al login</a></p>
+        <p><a href="{{ url_for('home') }}">Regresar al login</a></p>
     </div>
 </body>
 </html>
