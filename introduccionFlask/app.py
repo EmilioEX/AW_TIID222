@@ -83,13 +83,13 @@ def login():
     #verificar si se enviaron los datos del formulario
     if request.method =="POST":
         correo= request.form["correo"]
-        password= request.form["password"]
+        password= request.form["password_hash"]
         #Crear un cursos para ejecutar las consultas SQL
         cursor=mysql.connection.cursor()
         #Consultar sql
         sql="""
             SELECT usuarios.id, usuarios.nombre, usuarios.apellido_p, usuarios.apellido_m,
-                usuarios.correo, usuarios.password, roles.nombre from usuarios 
+                usuarios.correo, usuarios.password_hash, roles.nombre from usuarios 
                 inner join roles on usuarios.id_rol=roles.id_rol 
                 where usuarios.correo =%s 
             """
@@ -103,13 +103,36 @@ def login():
         if usuario and check_password_hash(usuario[5], password):
             session["id_usuario"]=usuario[0]
             session["nombre"]= usuario[1]
-            session["rol"]= usuario6[6]
-            if session["rol"]=="Administrador":
+            session["rol"]= usuario[6]
+            if session["rol"]=="administrador":
                 return redirect(url_for("admin"))
             return redirect(url_for("usuario"))
         return render_template("login.html", error="Correo o contraseña incorrectos")
     return render_template("login.html")
     
+#ruta de administrador
+@app.route("/admin")
+def admin():
+    if "id_usuario" not in session:
+        return redirect(url_for("login"))
+    if session.get("rol") != "administrador":
+        return "Acceso denegado"
+    return render_template("administrador.html", nombre=session["nombre"])
+
+#ruta de logout
+@app.route("/logout")
+def logout():
+    session.clear()
+    return redirect(url_for("login"))
+
+#ruta de usuario
+@app.route("/usuario")
+def usuario():
+    if "id_usuario" not in session:
+        return redirect(url_for("login"))
+    if session.get("rol") != "usuario":
+        return "Acceso denegado"
+    return render_template("usuarios.html", nombre=session["nombre"])
 
 #Ejecutamos el proyecto en el puerto 5000
 if __name__ == "__main__":
