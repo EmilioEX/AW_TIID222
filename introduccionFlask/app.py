@@ -1,13 +1,11 @@
-#Importamos librería de flask
+#Importamos elementos de flask
 from flask import Flask,render_template, redirect, request, url_for,session
-
-#Importamos la librería de MySQL para flask
+#Importamos MySQL para usar en flask
 from flask_mysqldb import MySQL
-
-#Importamos librerias para generar un hash y para comprobar que el hash coincida con la contraseña
+#Importamos librerias que nos permiten hacer un hash y comprobar que el hash coincida con una contraseña
 from werkzeug.security import generate_password_hash, check_password_hash
 
-#Creamos unas instancias del proyecto
+#Creamos la instancia para el proyecto
 app= Flask(__name__)
 
 #Permite cargar las vistas cuando se modifican
@@ -20,39 +18,32 @@ app.config['MYSQL_PASSWORD']= ''
 app.config['MYSQL_DB']= 'dbflask'
 app.secret_key='mysecretkey'
 mysql=MySQL(app)
-#Creamos rutas
+#Creación de rutas
 @app.route("/")
-#funcion que se llama home
+#nombramos la función como home
 def home():
-    #retornar mensaje
+    #retornamos un mensaje
     return render_template("login.html")
 
-#Creamos ruta de registro
+#Ruta para el registro
 @app.route("/register", methods=["GET", "POST"])
 def register():
-
     if request.method == "POST":
-
         nombre = request.form["nombre"]
         apellido_p = request.form["apellido_p"]
         apellido_m = request.form["apellido_m"]
         correo = request.form["correo"]
         password = request.form["password"]
         id_rol = request.form["id_rol"]
-
         password_hash = generate_password_hash(password)
-
         cursor = mysql.connection.cursor()
-
         cursor.execute(
             "SELECT id FROM usuarios WHERE correo = %s",
             (correo,)
         )
-
         if cursor.fetchone():
             cursor.close()
             return render_template("register.html")
-
         cursor.execute(
             """
             INSERT INTO usuarios
@@ -69,47 +60,67 @@ def register():
                 id_rol
             )
         )
-
         mysql.connection.commit()
         cursor.close()
-
         return redirect(url_for("home"))
-
     return render_template("register.html")
 
-#Ruta de login para el inicio de sesión
+#Ruta para el login (inicio de sesión)
 @app.route("/login", methods=["GET", "POST"])
 def login():
-    #verificar si se enviaron los datos del formulario
+    #revisamos si es que se enviaron los datos del formulario
     if request.method =="POST":
         correo= request.form["correo"]
-        password= request.form["password"]
-        #Crear un cursos para ejecutar las consultas SQL
+        password= request.form["password_hash"]
+        #Creamos un cursor para poder hacer las consultas SQL
         cursor=mysql.connection.cursor()
-        #Consultar sql
+        #Consultamos la BD
         sql="""
             SELECT usuarios.id, usuarios.nombre, usuarios.apellido_p, usuarios.apellido_m,
-                usuarios.correo, usuarios.password, roles.nombre from usuarios 
+                usuarios.correo, usuarios.password_hash, roles.nombre from usuarios 
                 inner join roles on usuarios.id_rol=roles.id_rol 
                 where usuarios.correo =%s 
             """
-        #ejecutamos la consulta utilizando el parámtero del correo
+        #hacemos una consulta cambiando el parámetro del correo
         cursor.execute(sql, (correo,))
-        #Recuperamos el primer registro encontrado
+        #Obtenemos lo primero que se encuentra
         usuario=cursor.fetchone()
-        #cerramos el cursor
+        #se cierra el cursor
         cursor.close()
-        #vamos a comprara la contraseña con el hash generado anteriormente al regitro en el BD
+        #comparamos la contraseña con el hash generado anteriormente al regitro en el BD
         if usuario and check_password_hash(usuario[5], password):
             session["id_usuario"]=usuario[0]
             session["nombre"]= usuario[1]
-            session["rol"]= usuario6[6]
-            if session["rol"]=="Administrador":
+            session["rol"]= usuario[6]
+            if session["rol"]=="administrador":
                 return redirect(url_for("admin"))
             return redirect(url_for("usuario"))
         return render_template("login.html", error="Correo o contraseña incorrectos")
     return render_template("login.html")
     
+#Ruta para el administrador
+@app.route("/admin")
+def admin():
+    if "id_usuario" not in session:
+        return redirect(url_for("login"))
+    if session.get("rol") != "administrador":
+        return "Acceso denegado"
+    return render_template("administrador.html", nombre=session["nombre"])
+
+#Logout
+@app.route("/logout")
+def logout():
+    session.clear()
+    return redirect(url_for("login"))
+
+#Ruta para el usuario
+@app.route("/usuario")
+def usuario():
+    if "id_usuario" not in session:
+        return redirect(url_for("login"))
+    if session.get("rol") != "usuario":
+        return "Acceso denegado"
+    return render_template("usuarios.html", nombre=session["nombre"])
 
 #Ejecutamos el proyecto en el puerto 5000
 if __name__ == "__main__":
