@@ -4,22 +4,39 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
 </head>
 
 <body> 
     <div>
-        <h1>Inicio de sesión</h1>
-        <form action="/login" method="POST">
-            <label>Correo:</label>
-            <input type="email" name="correo" required>
-            <br>
-            <label>Contraseña:</label>
-            <input type="password" name="password_hash" required>
-            <br>
-            <button type="submit">Entrar</button>
-        </form>
-        <p>¿No tienes cuenta?</p>
-        <a href="{{ url_for('register')}}">Registrate</a>    
+        <!-- Inicio de carta -->
+        
+        <div class="card card-border bg-base-100 w-96">
+        <div class="card-body">
+            <h2 class="card-title">Inicio de sesión</h2>
+            <!-- <p>A card component has a figure, a body part, and inside body there are title and actions parts</p> -->
+            <!-- Dentro carta -->
+            <form action="/login" method="POST">
+                <fieldset class="fieldset">
+                    <label class="label" >Correo</label>
+                    <input type="email" name="correo" class="input" placeholder="ejemplo@gmail.com" required/>
+                </fieldset>
+                <fieldset class="fieldset">
+                    <label class="label" >Contraseña:</label>
+                    <input type="password" name="password_hash" class="input" placeholder="12345" required/>
+                </fieldset>
+                <br>
+                <button class="btn btn-primary" type="submit">Entrar</button>
+            </form>
+            <p>¿No tienes cuenta? <a class="link link-primary" href="{{ url_for('register')}}">Registrate</a>  </p>
+               
+            <!-- Fin Dentro carta -->
+            <div class="card-actions justify-end">
+            </div>
+        </div>
+        </div>
+        <!-- Fin de carta -->
     </div>
 </body>
+<script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 </html>

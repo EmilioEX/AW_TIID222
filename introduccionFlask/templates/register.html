@@ -4,35 +4,52 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Register</title>
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
 </head>
 <body>
     <div>
-        <h1></h1>
-        <form action="/register" method="POST">
-            <label>Nombre: </label>
-            <input type="text" name="nombre" required >
-            <br>
-            <label>Apellido Paterno: </label>
-            <input type="text" name="apellido_p" required >
-            <br>
-            <label>Apellido Materno: </label>
-            <input type="text" name="apellido_m" required >
-            <br>
-            <label>Correo: </label>
-            <input type="text" name="correo" required >
-            <br>
-            <label>Contraseña: </label>
-            <input type="text" name="password" required >
-            <br>
-            <label for="id_rol">Rol: </label>
-            <select name="id_rol" id="id_rol">
-                <option value="1">Administrador</option>
-                <option value="2">Usuario</option>
-            </select>
-            <br>
-            <button type="submit">Registrarse</button>
-        </form>
-        <p><a href="{{ url_for('home') }}">Regresar al login</a></p>
+        <!-- Inicio de carta -->
+        
+        <div class="card card-border bg-base-100 w-96">
+        <div class="card-body">
+            <h2 class="card-title">Registrarse</h2>
+            <form action="/register" method="POST">
+                <fieldset class="fieldset">
+                    <label class="label" >Nombre: </label>
+                    <input type="text" name="nombre" class="input" placeholder="emilio" required/>
+                </fieldset>
+                <fieldset class="fieldset">
+                    <label class="label" >Apellido Paterno: </label>
+                    <input type="text" name="apellido_p" class="input" placeholder="rivera" required/>
+                </fieldset>
+                <fieldset class="fieldset">
+                    <label class="label" >Apellido Materno: </label>
+                    <input type="text" name="apellido_p" class="input" placeholder="garcia" required/>
+                </fieldset>
+                <fieldset class="fieldset">
+                    <label class="label" >Correo: </label>
+                    <input type="text" name="correo" class="input" placeholder="ejemplo@gmail.com" required/>
+                </fieldset>
+                <fieldset class="fieldset">
+                    <label class="label" >Correo: </label>
+                    <input type="text" name="password" class="input" placeholder="12345" required/>
+                </fieldset>
+                <label class="label" for="id_rol">Rol: </label>
+                <select class="select" name="id_rol" id="id_rol">
+                    <option value="1">Administrador</option>
+                    <option value="2">Usuario</option>
+                </select>
+                <br>
+                <br>
+                <button class="btn btn-primary" type="submit">Registrarse</button>
+            </form>
+            <p>Regresar al <a class="link link-primary" href="{{ url_for('home') }}">Login</a>  </p>
+            <div class="card-actions justify-end">
+            </div>
+        </div>
+        </div>
+        <!-- Fin de carta -->
     </div>
 </body>
+<script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 </html>
