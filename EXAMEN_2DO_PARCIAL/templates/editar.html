@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CRUD-editar</title>
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
+</head>
+<body>
+    <div>
+        <h1 class="card-title">Editar Calificaciones</h1>
+
+        <form action="/actualizar/{{Calificacion.0}}" method="POST"> 
+            <fieldset class="fieldset">
+            <input class="input" type="text" name="nombreAlumno" value="{{Calificacion.1}}">
+            </fieldset>
+            <fieldset class="fieldset">
+            <input class="input" type="text" name="nombreMateria" value="{{Calificacion.2}}">
+            </fieldset>
+            <fieldset class="fieldset">
+            <input class="input" type="text" name="calificacion" value="{{Calificacion.3}}">
+            </fieldset>
+            <button class="btn btn-primary" type="submit">Actualizar</button>
+        </form>
+    </div>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+</html>
