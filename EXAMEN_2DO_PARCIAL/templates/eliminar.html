@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CRUD-elimnar</title>
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
+</head>
+<body>
+    <div>
+        <h1>Eliminar Datos del Alumno</h1>
+        <form action="/eliminar/{{Calificacion.0}}" method="POST"> 
+            <input type="text" name="nombreAlumno" value="{{Calificacion.1}}">
+            <input type="text" name="nombreMateria" value="{{Calificacion.2}}">
+            <input type="text" name="calificacion" value="{{Calificacion.3}}">
+            <button class="btn btn-soft btn-primary" type="submit" onclick="return Eliminar()">Eliminar</button>
+            <button  class="btn btn-soft btn-primary"type="submit" onclick="Regresar()">Regresar</button>
+        </form>
+        <script>
+            function Eliminar(){
+                return confirm("¿Estás seguro de que deseas elimnar este registro?");
+            }
+            function Regresar(){
+                window.location.href="{{url_for('index')}}";
+            }
+        </script>
+    </div>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+</html>

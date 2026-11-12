@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CRUD-calificaciones</title>
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
+</head>
+<body>
+    <div>
+        <h1 class="card-title">Gestión de Calificaciones</h1>
+        {% with mensaje= get_flashed_messages()  %}
+            {%  if mensaje %}
+                {%  for msj in mensaje %}
+                    <h3>{{ msj }}</h3>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+
+        <form action="/guardar" method="POST"> 
+            <fieldset class="fieldset">
+            <input class="input" type="text" name="nombreAlumno" placeholder="Josué...">
+            </fieldset>
+            <fieldset class="fieldset">
+            <input class="input" type="text" name="matricula" placeholder="120503857...">
+            </fieldset>
+            <fieldset class="fieldset">
+            <input class="input" type="text" name="nombreMateria" placeholder="Matematicas...">
+            </fieldset>
+            <fieldset class="fieldset">
+            <input class="input" type="text" name="calificacion" placeholder="10...">
+            </fieldset>
+            <button class="btn btn-soft btn-primary" type="submit">Guardar</button>
+        </form>
+    </div>
+    <div>
+        <table class="table">
+            <thead><tr>
+                <td>Matricula:</td>
+                <td>Nombre Alumno:</td>
+                <td>Nombre Materia:</td>
+                <td>Calificación:</td>
+            </tr></thead>
+            <tbody>
+                {% for alb in listCalificaciones %}
+                <tr>
+                    <td>{{alb.0}}</td>
+                    <td>{{alb.1}}</td>
+                    <td>{{alb.2}}</td>
+                    <td>{{alb.3}}</td>
+                    <td>
+                        <a class="link link-primary" href="/editar/{{alb.0}}">Editar</a>
+                        <a class="link link-secondary" href="/eliminar/{{alb.0}}">Eliminar</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+</html>
